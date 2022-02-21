@@ -21,7 +21,7 @@ class Let_Type(enum.Enum):
 	CORRECT = 2
 
 ############################ GLOBAL VARS  ##############################
-wordfile  = "wordle-words.txt"
+wordfile  = "wordle_words.txt"
 wordlist  = []
 guesses   = []
 probs     = []
