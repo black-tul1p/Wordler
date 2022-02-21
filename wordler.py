@@ -2,23 +2,15 @@
 
 # Author: black-tul1p
 
-##############################  TODO  ##################################
-# 1. Add char list updates											   #
-# 2. Add regex creator												   #
-# 3. Add word getter												   #
-# 4. Add guess displayer											   #
-# 5. [OPTIONAL] Add a menu											   #
-########################################################################
-
 #############################  IMPORTS  ################################
-import enum, random
+import enum, random, collections
 
 #############################  CLASSES  ################################
 
 class Let_Type(enum.Enum):
 	INCORRECT = 0
-	PRESENT = 1
-	CORRECT = 2
+	PRESENT 	= 1
+	CORRECT 	= 2
 
 ############################ GLOBAL VARS  ##############################
 wordfile  = "wordle_words.txt"
@@ -27,22 +19,22 @@ guesses   = []
 probs     = []
 letters   = []
 guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
+gamend    = False
 
 help_text = '''
-Format for entering guess:
-  -> _#_#_#_#_#
+______________________________________________
+Format for entering score for the guess:
+  -> #####
 
-  where:
-    -> # is a probability value
-    -> _ is a letter
-
-  -> Example: W1O0R0D2S1
+Example: 00201
 
 Probability values for #:
-  -> 0 : incorrect
-  -> 1 : wrong position
-  -> 2 : correct
+  -> 0 : Incorrect
+  -> 1 : Wrong Position
+  -> 2 : Correct
+______________________________________________
 '''
+
 ########################################################################
 
 
@@ -74,18 +66,26 @@ def get_score(word, guess):
 # - Desc		: A function that takes user input for guesses in a loop 	 #
 ########################################################################
 def play(wordlist):
+	counter = 0
 	while len(wordlist) > 1:
-		counter = 0
 		guess = get_word(wordlist)
+		mapping = {"0": Let_Type.INCORRECT, "1": Let_Type.PRESENT, "2": Let_Type.CORRECT}
 
 		# Get and store guess in array
 		score = ""
 		while len(score) != 5:
-			score = input("Enter the score for the "+ guess_num[counter]+ " guess: ")
-			if (len(score) != 5):
-				print("[X] Please enter the score in the correct format\n")
-		score_array = [x for x in score]
-		wordlist = update_list(words, guess, score_array)
+			score = input("Score for the "+ guess_num[counter]+ " guess (or \"h\" for help): ")
+			if score.strip().lower() == "h":
+				print(help_text)
+			else:
+				if len(score) != 5 and not score.isnum():
+					print("[X] Please enter the score in the correct format\n")
+		if score == "22222":
+			print("\nTurns out the odds were in your favor after all.")
+			gamend = True
+			return [guess]
+		score_array = [mapping[char] for char in score if char in mapping]
+		wordlist = update_list(wordlist, guess, score_array)
 		print()
 		counter += 1
 	
@@ -100,7 +100,7 @@ def play(wordlist):
 def get_word(wordlist):
 	print(f"I foresee {len(wordlist)} possibilities...")
 	guess = random.choice(wordlist)
-	print(f"Tempt fate with {guess!r}...")
+	print(f"Tempt fate with {guess!r}...\n")
 	return guess
 
 
@@ -132,19 +132,23 @@ def update_list(words, guess, score):
 	return possible_words
 
 
-########################################################################
+############################ MAIN FUNCTION  ############################
 
 if __name__ == '__main__':
 	with open(wordfile, "r") as file:
 		wordlist = [word.strip().upper() for word in file.readlines()]
 
 	option = input("Enter \"h\" for help or \"p\" to play: ")
+	print()
 
 	if option.strip().lower() == "h":
 		print(help_text)
 	else: 
 		words = play(wordlist)
 
-	if not words:
-		raise RuntimeError("No words can save you now.")
-	print(f"The only word that can end this is {words[0]!r}.")
+	if not gamend:
+		if not words:
+			raise RuntimeError("No words can save you now.")
+		print(f"The only word that can end this is {words[0]!r}.")
+
+########################################################################
