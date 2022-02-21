@@ -19,7 +19,7 @@ guesses   = []
 probs     = []
 letters   = []
 guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
-gamend    = False
+not_gameover    = False
 
 help_text = '''
 ______________________________________________
@@ -82,7 +82,7 @@ def play(wordlist):
 					print("[X] Please enter the score in the correct format\n")
 		if score == "22222":
 			print("\nTurns out the odds were in your favor after all.")
-			gamend = True
+			not_gameover = True
 			return [guess]
 		score_array = [mapping[char] for char in score if char in mapping]
 		wordlist = update_list(wordlist, guess, score_array)
@@ -99,6 +99,8 @@ def play(wordlist):
 ########################################################################
 def get_word(wordlist):
 	print(f"I foresee {len(wordlist)} possibilities...")
+	sample = ", ".join(words[:24])
+	print(f"Some of which include {sample}.")
 	guess = random.choice(wordlist)
 	print(f"Tempt fate with {guess!r}...\n")
 	return guess
@@ -146,9 +148,12 @@ if __name__ == '__main__':
 	else: 
 		words = play(wordlist)
 
-	if not gamend:
+	if not_gameover:
 		if not words:
 			raise RuntimeError("No words can save you now.")
-		print(f"The only word that can end this is {words[0]!r}.")
+		if not words[0]:
+			print(f"Only a miracle can save you now.")
+		else:
+			print(f"The only word that can end this is {words[0]!r}.")
 
 ########################################################################
