@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 word_len = int(input("Enter the length of the words to be extracted: "))
 
 input_f = "words_alpha.txt"
