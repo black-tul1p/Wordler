@@ -19,7 +19,7 @@ guesses   = []
 probs     = []
 letters   = []
 guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
-not_gameover    = False
+gameover	= False
 
 help_text = '''
 ______________________________________________
@@ -71,6 +71,11 @@ def play(wordlist):
 		guess = get_word(wordlist)
 		mapping = {"0": Let_Type.INCORRECT, "1": Let_Type.PRESENT, "2": Let_Type.CORRECT}
 
+		# Get custom guess from user if needed
+		c_input = input("Enter a custom guess or \"c\" to continue: ")
+		if c_input.strip().lower() != "c":
+			guess = c_input.strip().upper()
+
 		# Get and store guess in array
 		score = ""
 		while len(score) != 5:
@@ -82,7 +87,7 @@ def play(wordlist):
 					print("[X] Please enter the score in the correct format\n")
 		if score == "22222":
 			print("\nTurns out the odds were in your favor after all.")
-			not_gameover = True
+			gameover = True
 			return [guess]
 		score_array = [mapping[char] for char in score if char in mapping]
 		wordlist = update_list(wordlist, guess, score_array)
@@ -148,7 +153,7 @@ if __name__ == '__main__':
 	else: 
 		words = play(wordlist)
 
-	if not_gameover:
+	if gameover:
 		if not words:
 			raise RuntimeError("No words can save you now.")
 		if not words[0]:
