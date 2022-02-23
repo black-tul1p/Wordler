@@ -99,7 +99,7 @@ def play(wordlist):
 ########################################################################
 def get_word(wordlist):
 	print(f"I foresee {len(wordlist)} possibilities...")
-	sample = ", ".join(words[:24])
+	sample = ", ".join(wordlist[:24])
 	print(f"Some of which include {sample}.")
 	guess = random.choice(wordlist)
 	print(f"Tempt fate with {guess!r}...\n")
