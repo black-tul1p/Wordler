@@ -40,7 +40,7 @@ ______________________________________________
 
 ##############################  FUNCTION  ##############################
 # - Inputs  : User guess and word to check against										 #
-# - Outputs : A score array of score values for each guess char 	 		 #																									   #
+# - Outputs : Array of score values for each char in the guess string	 #																									   #
 # - Desc		: A function that calculates accuracy score of a guess		 #
 ########################################################################
 def get_score(word, guess):
@@ -63,32 +63,38 @@ def get_score(word, guess):
 ##############################  FUNCTION  ##############################
 # - Inputs  : List of possible words																   #
 # - Outputs : Final list of words																		   #
-# - Desc		: A function that takes user input for guesses in a loop 	 #
+# - Desc		: A function that takes user input for guesses in a loop	 #
 ########################################################################
 def play(wordlist):
 	counter = 0
+	mapping = {"0": Let_Type.INCORRECT, "1": Let_Type.PRESENT, "2": Let_Type.CORRECT}
 	while len(wordlist) > 1:
+		# Get random word from list of possible words
 		guess = get_word(wordlist)
-		mapping = {"0": Let_Type.INCORRECT, "1": Let_Type.PRESENT, "2": Let_Type.CORRECT}
-
+		
 		# Get custom guess from user if needed
-		c_input = input("Enter a custom guess or \"c\" to continue: ")
-		if c_input.strip().lower() != "c":
-			guess = c_input.strip().upper()
-
-		# Get and store guess in array
+		c_input = input("Enter a custom guess or score (or \"h\" for help): ")
+		c_input = c_input.strip().upper()
 		score = ""
-		while len(score) != 5:
-			score = input("Score for the "+ guess_num[counter]+ " guess (or \"h\" for help): ")
-			if score.strip().lower() == "h":
-				print(help_text)
-			else:
-				if len(score) != 5 and not score.isnum():
-					print("[X] Please enter the score in the correct format\n")
+
+		# Input verification loop
+		while (not c_input.isalpha() and not c_input.isnumeric()) or len(c_input) != 5:
+			c_input = input("Incorrect input, try again: ")
+		if c_input.isnumeric():
+			score = c_input.strip()
+		elif c_input.lower() == "h":
+			print(help_text)
+		else:
+			guess = c_input
+			while not score.isnumeric() or len(score) != 5:
+				score = input("Enter the score: ")
+
+		# Case when guess is completely right
 		if score == "22222":
 			print("\nTurns out the odds were in your favor after all.")
-			gameover = True
 			return [guess]
+
+		# Create score array and update list of possible words
 		score_array = [mapping[char] for char in score if char in mapping]
 		wordlist = update_list(wordlist, guess, score_array)
 		print()
@@ -98,9 +104,9 @@ def play(wordlist):
 
 
 ##############################  FUNCTION  ##############################
-# - Inputs  : The user-entered guess string													   #
-# - Outputs : Arrays containing letters and probability from guesses   #
-# - Desc		: A function that extracts information from guesses				 #
+# - Inputs  : List of possible words																   #
+# - Outputs : Random guess string																		   #
+# - Desc		: A function that returns a random guess from wordlist		 #
 ########################################################################
 def get_word(wordlist):
 	print(f"I foresee {len(wordlist)} possibilities...")
@@ -112,9 +118,9 @@ def get_word(wordlist):
 
 
 ##############################  FUNCTION  ##############################
-# - Inputs  : The user-entered guess string													   #
-# - Outputs : Arrays containing letters and probability from guesses   #
-# - Desc		: A function that extracts information from guesses				 #
+# - Inputs  : Current list of words, guess string, score array				 #
+# - Outputs : Array containing possible guesses   										 #
+# - Desc		: A function updates list of possible words based					 #
 ########################################################################
 def update_list(words, guess, score):
 	possible_words = []
@@ -153,12 +159,9 @@ if __name__ == '__main__':
 	else: 
 		words = play(wordlist)
 
-	if gameover:
-		if not words:
-			raise RuntimeError("No words can save you now.")
-		if not words[0]:
-			print(f"Only a miracle can save you now.")
-		else:
-			print(f"The only word that can end this is {words[0]!r}.")
+	if not words:
+		print(f"Only a miracle can save you now.")
+	else:
+		print(f"The only word that can end this is {words[0]!r}.")
 
 ########################################################################
