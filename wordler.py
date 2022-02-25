@@ -155,7 +155,7 @@ if __name__ == '__main__':
 	with open(wordfile, "r") as file:
 		wordlist = [word.strip().upper() for word in file.readlines()]
 
-	option = input("Enter \"h\" for help or \"p\" to play: ")
+	option = input("Enter \"h\" for help or [ENTER] to play: ")
 	print()
 
 	if option.strip().lower() == "h":
