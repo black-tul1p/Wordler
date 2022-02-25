@@ -1,6 +1,6 @@
 <img src="https://github.com/black-tul1p/wordler/blob/main/Images/logo.png" width="200" /> <hr>
 
-A [Wordle](https://www.nytimes.com/games/wordle/index.html) solver implemented in Python!
+A [Wordle](https://www.nytimes.com/games/wordle/index.html) solver implemented in Python! 🐍
 
 <div align="center">
 	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wordle_196_example.svg/1200px-Wordle_196_example.svg.png" width="500" />
