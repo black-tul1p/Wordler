@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-# Author: black-tul1p
+# Author: github.com/black-tul1p
 
 #############################  IMPORTS  ################################
 import enum, random, collections
