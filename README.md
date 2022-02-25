@@ -1,4 +1,4 @@
-<img src="https://github.com/black-tul1p/wordler/blob/main/Images/logo.png" width="200" /> <hr>
+<br> <img src="https://github.com/black-tul1p/wordler/blob/main/Images/logo.png" width="200" /> <hr>
 
 A [Wordle](https://www.nytimes.com/games/wordle/index.html) solver implemented in Python 🐍
 
