@@ -25,7 +25,7 @@ Clone this repo by running: `git clone https://github.com/black-tul1p/wordler.gi
 Run the program after `cd`-ing into the cloned directory by running: `./wordler.py` or `python3 wordler.py`
 
 ## Example Run 🎮
-```
+```python
 $ ./wordler.py
 
 Enter "h" for help or [ENTER] to play:
