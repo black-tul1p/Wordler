@@ -22,17 +22,21 @@ guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
 gameover	= False
 
 help_text = '''
-______________________________________________
-Format for entering score for the guess:
-  -> #####
+Welcome to Wordler!
+________________________________________________
+You can either enter a custom word and its score
+or just the score for the suggested word.
 
-Example: 00201
+Format for the score: #####
+> Example: 00201
 
-Probability values for #:
-  -> 0 : Incorrect
-  -> 1 : Wrong Position
-  -> 2 : Correct
-______________________________________________
+Possible values for #:
+	> 0 : Incorrect
+  > 1 : Wrong Position
+  > 2 : Correct
+________________________________________________
+P.S. it's ok if you use this program for solves, 
+no one will know :) 
 '''
 
 ########################################################################
