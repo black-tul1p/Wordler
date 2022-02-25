@@ -131,16 +131,20 @@ def update_list(words, guess, score):
 
 	for word in words:
 		maybe = collections.Counter(w for w, s in zip(word, score) if s != Let_Type.CORRECT)
-
+		# Add word to updated list if it passes all the cases below
 		for word_char, guess_char, value in zip(word, guess, score):
+			# CASE: Missing correct character
 			if word_char != guess_char and value == Let_Type.CORRECT:
 				break
+			# CASE: Incorrect Guess
 			elif word_char == guess_char and value != Let_Type.CORRECT:
 				break
+			# CASE: Missing present character 
 			elif value == Let_Type.PRESENT:
 				if not maybe[guess_char]:
 					break
 				maybe[guess_char] -= 1
+			# CASE: Contains absent character
 			elif value == Let_Type.INCORRECT and maybe[guess_char]:
 				break
 		else:
