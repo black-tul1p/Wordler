@@ -61,4 +61,4 @@ The only word that can end this is 'VIVID'.
 </div>
 
 <hr>
-<b>Note:</b> This program uses the wordle wordlist from https://github.com/csokolove/wordle-word-list/blob/main/wordlist.csv
+<b>Note:</b> This program uses the wordlist from <a href="https://github.com/csokolove/wordle-word-list/blob/main/wordlist.csv">csokolove/wordle-word-list</a>.
