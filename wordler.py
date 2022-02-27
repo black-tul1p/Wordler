@@ -20,7 +20,6 @@ probs     = []
 letters   = []
 guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
 best_word = "RAISE"
-gameover  = False
 
 help_text = '''
 Welcome to Wordler!
@@ -104,7 +103,7 @@ def play(wordlist):
 		# Case when guess is completely right
 		if score == "22222":
 			print("\nTurns out the odds were in your favor after all.")
-			return [guess]
+			return "WIN"
 
 		# Create score array and update list of possible words
 		score_array = [mapping[char] for char in score if char in mapping]
@@ -112,7 +111,7 @@ def play(wordlist):
 		print()
 		counter += 1
 	
-	return wordlist
+	return wordlist.pop()
 
 
 ##############################  FUNCTION  ##############################
@@ -195,11 +194,11 @@ if __name__ == '__main__':
 	with open(wordfile, "r") as file:
 		wordlist = [word.strip().upper() for word in file.readlines()]
 
-	words = play(wordlist)
+	word = play(wordlist)
 
-	if not words:
+	if not word:
 		print(f"Only a miracle can save you now.")
-	else:
-		print(f"The only word that can end this is {words[0]!r}.")
+	elif word != "WIN":
+		print(f"The only word that can end this is {word!r}.")
 
 ########################################################################
