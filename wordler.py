@@ -87,9 +87,11 @@ def play(wordlist):
 		# Get random word from list of possible words
 		if counter == 0:
 			guess = best_word
+			print(f"> I see {len(wordlist)} possibilities...")
 			print(f"│ Start by giving {guess!r} a try...\n")
 		elif counter == 1:
 			guess = get_opp_word(best_word)
+			print(f"> I see {len(wordlist)} possibilities...")
 			print(f"│ Now, give {guess!r} a go...\n")
 		else:
 			guess = get_word(wordlist)
@@ -160,7 +162,7 @@ def get_opp_word(guess):
 # - Desc	: A function that returns a random guess from wordlist	   #
 ########################################################################
 def get_word(wordlist):
-	print(f"│ I see {len(wordlist)} possibilities...")
+	print(f"> I see {len(wordlist)} possibilities...")
 	guess = random.choice(wordlist)
 	print(f"│ Try guessing {guess!r}...\n")
 	return guess
