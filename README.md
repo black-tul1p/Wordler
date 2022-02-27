@@ -31,7 +31,7 @@ Each word in the wordlist is scored against the guess and are added to the updat
 
 <p align="center"> <img src="https://github.com/black-tul1p/wordler/blob/main/Images/Explanation_2.png" width="300" /> </p>
 
-This narrows down the list of possibilities each iteration and, on average, solves the wordle in 4<i>-ish</i> tries! 
+This narrows down the list of possibilities each iteration and, on average, solves the wordle in 3-4 tries! 
 
 ## Example Run 🎮
 ```python
@@ -56,7 +56,7 @@ Turns out the odds were in your favor after all.
 	<img src="https://github.com/black-tul1p/wordler/blob/main/Images/solve.png" width="400" />
 	<p align="center">
 		<sub>
-			Correct on the 4th try? Not bad 🙃
+			Correct on the 3rd try? Pretty good! 🤑
 		</sub>
 	</p>
 </div>
