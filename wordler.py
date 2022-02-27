@@ -216,4 +216,6 @@ if __name__ == '__main__':
 	elif word != "WIN":
 		print(f"│ The word is {word!r}!")
 
+	print(end_text)
+
 ########################################################################
