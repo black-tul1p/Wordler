@@ -19,7 +19,8 @@ guesses   = []
 probs     = []
 letters   = []
 guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
-gameover	= False
+best_word = "RAISE"
+gameover  = False
 
 help_text = '''
 Welcome to Wordler!
@@ -43,9 +44,9 @@ no one will know :)
 
 
 ##############################  FUNCTION  ##############################
-# - Inputs  : User guess and word to check against										 #
-# - Outputs : Array of score values for each char in the guess string	 #																									   #
-# - Desc		: A function that calculates accuracy score of a guess		 #
+# - Inputs  : User guess and word to check against					   #
+# - Outputs : Array of score values for each char in the guess string  #																									   #
+# - Desc	: A function that calculates accuracy score of a guess	   #
 ########################################################################
 def get_score(word, guess):
 	score = []
@@ -65,16 +66,23 @@ def get_score(word, guess):
 
 
 ##############################  FUNCTION  ##############################
-# - Inputs  : List of possible words																   #
-# - Outputs : Final list of words																		   #
-# - Desc		: A function that takes user input for guesses in a loop	 #
+# - Inputs  : List of possible words								   #
+# - Outputs : Final list of words									   #
+# - Desc	: A function that takes user input for guesses in a loop   #
 ########################################################################
 def play(wordlist):
 	counter = 0
 	mapping = {"0": Let_Type.INCORRECT, "1": Let_Type.PRESENT, "2": Let_Type.CORRECT}
 	while len(wordlist) > 1:
 		# Get random word from list of possible words
-		guess = get_word(wordlist)
+		if counter == 0:
+			guess = best_word
+			print(f"Start by tempting fate with {guess!r}...\n")
+		elif counter == 1:
+			guess = get_opp_word(best_word)
+			print(f"Next, tempt fate with {guess!r}...\n")
+		else:
+			guess = get_word(wordlist)
 		
 		# Get custom guess from user if needed
 		c_input = input("Enter a custom guess or score (or \"h\" for help): ")
@@ -108,9 +116,37 @@ def play(wordlist):
 
 
 ##############################  FUNCTION  ##############################
-# - Inputs  : List of possible words																   #
-# - Outputs : Random guess string																		   #
-# - Desc		: A function that returns a random guess from wordlist		 #
+# - Inputs  : Complete list of possible words						   #
+# - Outputs : Random second best guess string						   #
+# - Desc	: A function that returns a random guess containing no	   #
+#			  letters from the best guess		  					   #
+########################################################################
+
+def get_opp_word(guess):
+	possible_words = []
+	og_wlist = []
+	with open(wordfile, "r") as file:
+		og_wlist = [word.strip().upper() for word in file.readlines()]
+
+	for word in og_wlist:
+		flag = 0
+		# Set flag if word contains characters from original guess
+		for word_char in word:
+			if word_char in guess:
+				flag = 1
+				break
+		# Make sure characters are not present in original guess
+		# and make sure all letters are unique
+		if flag != 1 and len(set(word)) == len(word):
+			possible_words.append(word)
+
+	return random.choice(possible_words)
+
+
+##############################  FUNCTION  ##############################
+# - Inputs  : List of possible words								   #
+# - Outputs : Random guess string									   #
+# - Desc	: A function that returns a random guess from wordlist	   #
 ########################################################################
 def get_word(wordlist):
 	print(f"I foresee {len(wordlist)} possibilities...")
@@ -122,9 +158,9 @@ def get_word(wordlist):
 
 
 ##############################  FUNCTION  ##############################
-# - Inputs  : Current list of words, guess string, score array				 #
-# - Outputs : Array containing possible guesses   										 #
-# - Desc		: A function updates list of possible words based					 #
+# - Inputs  : Current list of words, guess string, score array		   #
+# - Outputs : Array containing possible guesses   					   #
+# - Desc	: A function updates list of possible words based		   #
 ########################################################################
 def update_list(words, guess, score):
 	possible_words = []
@@ -159,13 +195,7 @@ if __name__ == '__main__':
 	with open(wordfile, "r") as file:
 		wordlist = [word.strip().upper() for word in file.readlines()]
 
-	option = input("Enter \"h\" for help or [ENTER] to play: ")
-	print()
-
-	if option.strip().lower() == "h":
-		print(help_text)
-	else: 
-		words = play(wordlist)
+	words = play(wordlist)
 
 	if not words:
 		print(f"Only a miracle can save you now.")
