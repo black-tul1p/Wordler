@@ -40,20 +40,31 @@ All words that do not fit this criteria are *removed* from the cached wordlist. 
 ```python
 $ ./wordler.py
 
-Start by tempting fate with 'RAISE'...
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Welcome to Wordler!                         │
+└───────────────────────────────────────────────────────────────────────┘
 
-Enter a custom guess or score (or "h" for help): 00210
+> I see 2316 possibilities...
+│ Start by giving 'RAISE' a try...
 
-Next, tempt fate with 'FLOWN'...
+Enter a custom guess or score for suggested word (or "h" for help): 00210
 
-Enter a custom guess or score (or "h" for help): 01000
+> I see 29 possibilities...
+│ Now, give 'THONG' a go...
 
-I foresee 5 possibilities...
-Tempt fate with 'SPILL'...
+Enter a custom guess or score for suggested word (or "h" for help): 00000
 
-Enter a custom guess or score (or "h" for help): 22222
+> I see 9 possibilities...
+│ Try guessing 'SPILL'...
 
-Turns out the odds were in your favor after all.
+Enter a custom guess or score for suggested word (or "h" for help): 22222
+
+│ You did it!
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                      Thank you for using Wordler!                     │
+└───────────────────────────────────────────────────────────────────────┘
+
 ```
 <div align="center">
 	<img src="https://github.com/black-tul1p/wordler/blob/main/Images/solve.png" width="400" />
