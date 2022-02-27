@@ -20,7 +20,7 @@ In the next iteration, the code creates a list of words from the original (unalt
 
 > The word contains purely unique characters
 
-This allows us to try out a total of 10 unique characters in the first two tries, to narrow down the updated wordlist as much as possible.
+This allows us to try out a total of 10 unique characters in the first two tries, so that we can narrow down the updated wordlist as much as possible.
 
 In the further iterations, the code simply suggests a random word from the updated wordlist each iteration, after which the wordlist is updated to get rid of unlikely words. The elimination of words is performed using a scoring mechanism.
 
