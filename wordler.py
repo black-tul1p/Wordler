@@ -7,19 +7,15 @@ import enum, random, collections
 
 #############################  CLASSES  ################################
 
-class Let_Type(enum.Enum):
+class Letter_Type(enum.Enum):
 	INCORRECT = 0
 	PRESENT 	= 1
 	CORRECT 	= 2
 
 ############################ GLOBAL VARS  ##############################
 wordfile  = "wordle_words.txt"
-wordlist  = []
-guesses   = []
-probs     = []
-letters   = []
-guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
 best_word = "RAISE"
+wordlist  = []
 
 title = '''
 ┌───────────────────────────────────────────────────────────────────────┐
@@ -69,12 +65,12 @@ def get_score(word, guess):
 	# Calculate score for guess against word
 	for guess_char, word_char in zip(guess, word):
 		if guess_char == word_char:
-			score.append(Let_Type.CORRECT)
+			score.append(Letter_Type.CORRECT)
 		elif guess_char in word_char and maybe[guess_char] > 0:
-			score.append(Let_Type.PRESENT)
+			score.append(Letter_Type.PRESENT)
 			maybe[guess_char] -= 1
 		else:
-			score.append(Let_Type.INCORRECT)
+			score.append(Letter_Type.INCORRECT)
 
 	return score
 
@@ -86,7 +82,7 @@ def get_score(word, guess):
 ########################################################################
 def play(wordlist):
 	counter = 0
-	mapping = {"0": Let_Type.INCORRECT, "1": Let_Type.PRESENT, "2": Let_Type.CORRECT}
+	mapping = {"0": Letter_Type.INCORRECT, "1": Letter_Type.PRESENT, "2": Letter_Type.CORRECT}
 	while len(wordlist) > 1:
 		# Get random word from list of possible words
 		if counter == 0:
@@ -179,22 +175,22 @@ def update_list(words, guess, score):
 	possible_words = []
 
 	for word in words:
-		maybe = collections.Counter(w for w, s in zip(word, score) if s != Let_Type.CORRECT)
+		maybe = collections.Counter(w for w, s in zip(word, score) if s != Letter_Type.CORRECT)
 		# Add word to updated list if it passes all the cases below
 		for word_char, guess_char, value in zip(word, guess, score):
 			# CASE: Missing correct character
-			if word_char != guess_char and value == Let_Type.CORRECT:
+			if word_char != guess_char and value == Letter_Type.CORRECT:
 				break
 			# CASE: Incorrect Guess
-			elif word_char == guess_char and value != Let_Type.CORRECT:
+			elif word_char == guess_char and value != Letter_Type.CORRECT:
 				break
 			# CASE: Missing present character 
-			elif value == Let_Type.PRESENT:
+			elif value == Letter_Type.PRESENT:
 				if not maybe[guess_char]:
 					break
 				maybe[guess_char] -= 1
 			# CASE: Contains absent character
-			elif value == Let_Type.INCORRECT and maybe[guess_char]:
+			elif value == Letter_Type.INCORRECT and maybe[guess_char]:
 				break
 		else:
 			possible_words.append(word)
