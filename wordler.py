@@ -22,7 +22,7 @@ guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
 best_word = "RAISE"
 
 help_text = '''
-Welcome to Wordler!
+              Welcome to Wordler!
 ________________________________________________
 You can either enter a custom word and its score
 or just the score for the suggested word.
@@ -36,7 +36,8 @@ Possible values for #:
   > 2 : Correct
 ________________________________________________
 P.S. it's ok if you use this program for solves, 
-no one will know :) 
+no one will know :)
+								   ~ black-tul1p
 '''
 
 ########################################################################
@@ -76,21 +77,21 @@ def play(wordlist):
 		# Get random word from list of possible words
 		if counter == 0:
 			guess = best_word
-			print(f"Start by tempting fate with {guess!r}...\n")
+			print(f"Start by giving {guess!r} a try...\n")
 		elif counter == 1:
 			guess = get_opp_word(best_word)
-			print(f"Next, tempt fate with {guess!r}...\n")
+			print(f"Next, give {guess!r} a go...\n")
 		else:
 			guess = get_word(wordlist)
 		
 		# Get custom guess from user if needed
-		c_input = input("Enter a custom guess or score (or \"h\" for help): ")
+		c_input = input("Enter a custom guess or score for suggested word (or \"h\" for help): ")
 		c_input = c_input.strip().upper()
 		score = ""
 
 		# Input verification loop
 		while (not c_input.isalpha() and not c_input.isnumeric()) or len(c_input) != 5:
-			c_input = input("Incorrect input, try again: ")
+			c_input = input("Incorrect input, please try again: ")
 		if c_input.isnumeric():
 			score = c_input.strip()
 		elif c_input.lower() == "h":
@@ -102,7 +103,7 @@ def play(wordlist):
 
 		# Case when guess is completely right
 		if score == "22222":
-			print("\nTurns out the odds were in your favor after all.")
+			print("\nYou did it!")
 			return "WIN"
 
 		# Create score array and update list of possible words
@@ -148,11 +149,9 @@ def get_opp_word(guess):
 # - Desc	: A function that returns a random guess from wordlist	   #
 ########################################################################
 def get_word(wordlist):
-	print(f"I foresee {len(wordlist)} possibilities...")
-	sample = ", ".join(wordlist[:24])
-	print(f"Some of which include {sample}.")
+	print(f"I see {len(wordlist)} possibilities...")
 	guess = random.choice(wordlist)
-	print(f"Tempt fate with {guess!r}...\n")
+	print(f"Try guessing {guess!r}...\n")
 	return guess
 
 
@@ -197,8 +196,8 @@ if __name__ == '__main__':
 	word = play(wordlist)
 
 	if not word:
-		print(f"Only a miracle can save you now.")
+		print(f"Sorry, the word isn't present in my wordlist :/")
 	elif word != "WIN":
-		print(f"The only word that can end this is {word!r}.")
+		print(f"The word is {word!r}!")
 
 ########################################################################
