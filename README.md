@@ -34,7 +34,7 @@ Each word in the cached wordlist is scored against the guess and is not removed 
 
 <p align="center"> <img src="https://github.com/black-tul1p/wordler/blob/main/Images/Explanation_2.png" width="300" /> </p>
 
-All words that do not fit this criteria are *removed* from the cached wordlist. This narrows down the list of possibilities each iteration and, on average, solves the wordle in **3 tries**! 
+All words that do not fit this criteria are *removed* from the cached wordlist. This narrows down the list of possibilities each iteration and, on average, solves the wordle in **3-ish tries**! 
 
 ## Example Run 🎮
 ```python
