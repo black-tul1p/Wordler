@@ -21,23 +21,37 @@ letters   = []
 guess_num = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
 best_word = "RAISE"
 
-help_text = '''
-              Welcome to Wordler!
-________________________________________________
-You can either enter a custom word and its score
-or just the score for the suggested word.
+title = '''
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Welcome to Wordler!                         │
+└───────────────────────────────────────────────────────────────────────┘
+'''
 
-Format for the score: #####
-> Example: 00201
+help_text = '''\n
+┌───────────────────────────────────────────────────────────────────────┐
+│                                  HELP                                 │
+├───────────────────────────────────────────────────────────────────────┤
+│ You can either enter a custom word and its score or just the score    │
+│ for the suggested word .                                              │
+│                                                                       │
+│ Format for the score: #####                                           │
+│ > Example: 00201                                                      │
+│                                                                       │
+│ Possible values for #:                                                │
+│   > 0 : Incorrect                                                     │
+│   > 1 : Wrong Position                                                │
+│   > 2 : Correct                                                       │
+├───────────────────────────────────────────────────────────────────────┤
+│ P.S. it's ok if you use this program for solves, no one will know :)  │
+│                                                                       │
+│                                                          ~ black-tul1p│
+└───────────────────────────────────────────────────────────────────────┘
+'''
 
-Possible values for #:
-	> 0 : Incorrect
-  > 1 : Wrong Position
-  > 2 : Correct
-________________________________________________
-P.S. it's ok if you use this program for solves, 
-no one will know :)
-								   ~ black-tul1p
+end_text = '''
+┌───────────────────────────────────────────────────────────────────────┐
+│                      Thank you for using Wordler!                     │
+└───────────────────────────────────────────────────────────────────────┘
 '''
 
 ########################################################################
@@ -77,10 +91,10 @@ def play(wordlist):
 		# Get random word from list of possible words
 		if counter == 0:
 			guess = best_word
-			print(f"Start by giving {guess!r} a try...\n")
+			print(f"│ Start by giving {guess!r} a try...\n")
 		elif counter == 1:
 			guess = get_opp_word(best_word)
-			print(f"Next, give {guess!r} a go...\n")
+			print(f"│ Now, give {guess!r} a go...\n")
 		else:
 			guess = get_word(wordlist)
 		
@@ -90,12 +104,13 @@ def play(wordlist):
 		score = ""
 
 		# Input verification loop
-		while (not c_input.isalpha() and not c_input.isnumeric()) or len(c_input) != 5:
-			c_input = input("Incorrect input, please try again: ")
+		while (not c_input.isalpha() and not c_input.isnumeric()) and (len(c_input) != 5 or c_input.lower() != "h"):
+			c_input = input("│ Incorrect input, please try again: ")
 		if c_input.isnumeric():
 			score = c_input.strip()
 		elif c_input.lower() == "h":
 			print(help_text)
+			counter -= 1
 		else:
 			guess = c_input
 			while not score.isnumeric() or len(score) != 5:
@@ -103,7 +118,7 @@ def play(wordlist):
 
 		# Case when guess is completely right
 		if score == "22222":
-			print("\nYou did it!")
+			print("\n│ You did it!")
 			return "WIN"
 
 		# Create score array and update list of possible words
@@ -149,9 +164,9 @@ def get_opp_word(guess):
 # - Desc	: A function that returns a random guess from wordlist	   #
 ########################################################################
 def get_word(wordlist):
-	print(f"I see {len(wordlist)} possibilities...")
+	print(f"│ I see {len(wordlist)} possibilities...")
 	guess = random.choice(wordlist)
-	print(f"Try guessing {guess!r}...\n")
+	print(f"│ Try guessing {guess!r}...\n")
 	return guess
 
 
@@ -193,11 +208,12 @@ if __name__ == '__main__':
 	with open(wordfile, "r") as file:
 		wordlist = [word.strip().upper() for word in file.readlines()]
 
+	print(title)
 	word = play(wordlist)
 
 	if not word:
-		print(f"Sorry, the word isn't present in my wordlist :/")
+		print(f"│ Sorry, the word isn't present in my wordlist :/")
 	elif word != "WIN":
-		print(f"The word is {word!r}!")
+		print(f"│ The word is {word!r}!")
 
 ########################################################################
