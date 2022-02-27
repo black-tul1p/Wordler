@@ -13,7 +13,16 @@ A [Wordle](https://www.nytimes.com/games/wordle/index.html) solver implemented i
 
 ## How does it work? 🤔
 
-This implementation is pretty intuitive, no fancy graph or path-finding algorithms were used to determine the most likely word. The code simply suggests a random word from the wordlist each iteration, after which the wordlist is updated to get rid of unlikely words. The elimination of words is performed using a scoring mechanism. 
+This implementation is pretty intuitive, no fancy graph or path-finding algorithms were used to determine the most likely word. The code begins by suggesting a word containing the most mathematically likely unique characters, `RAISE`, to greatly narrow the updated wordlist.
+
+In the next iteration, the code creates a list of words from the original (unaltered) wordlist using the following rules:
+> The word contains none of the characters in the first guess
+
+> The word contains purely unique characters
+
+This allows us to try out a total of 10 unique characters in the first two tries, to narrow down the updated wordlist as much as possible.
+
+In the further iterations, the code simply suggests a random word from the updated wordlist each iteration, after which the wordlist is updated to get rid of unlikely words. The elimination of words is performed using a scoring mechanism.
 
 The scores are as follows:
 <p align="center"> <img src="https://github.com/black-tul1p/wordler/blob/main/Images/Explanation_1.png" width="300" /> </p>
