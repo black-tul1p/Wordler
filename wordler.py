@@ -125,7 +125,7 @@ def play(wordlist):
 		print()
 		counter += 1
 	
-	return wordlist.pop()
+	return [] if not wordlist else wordlist.pop() 
 
 
 ##############################  FUNCTION  ##############################
