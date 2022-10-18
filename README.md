@@ -88,7 +88,14 @@ Clone this repo by running: `git clone https://github.com/black-tul1p/wordler.gi
 
 Run the program after `cd`-ing into the cloned directory by running: `./wordler.py` or `python3 wordler.py`
 
+## Next Steps ✏️
+There are a few approaches I can think of when trying to make this program more accurate. These involve recommending words based on :
+1. highest number of distinct constituent alphabets from the wordlist
+2. frequency of occurrence of constituent alphabets in the English language
+3. combining `1` and `2` and picking words with distinct constituent alphabets in the English language
+4. frequency of occurence of entire (5-letter) words in the English language
+5. some combination of `4` and one of the prior options for fine-tuning
+
 <hr>
 <p> <b>Note:</b> This program uses the wordlist from <a href="https://github.com/csokolove/wordle-word-list/blob/main/wordlist.csv">csokolove/wordle-word-list</a>. </p>
 <p> Thanks to <a href = "https://medium.com/@tglaiel/the-mathematically-optimal-first-guess-in-wordle-cbcb03c19b0a">Tyler Glaiel</a> for figuring out the most mathematically likely word with non-repeating characters.</p> 
-
