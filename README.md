@@ -96,6 +96,8 @@ There are a few approaches I can think of when trying to make this program more 
 4. frequency of occurence of entire (5-letter) words in the English language
 5. some combination of `4` and one of the prior options for fine-tuning
 
+(Intuition tells me that approaches `4` and `5` will provide the best results.)
+
 <hr>
 <p> <b>Note:</b> This program uses the wordlist from <a href="https://github.com/csokolove/wordle-word-list/blob/main/wordlist.csv">csokolove/wordle-word-list</a>. </p>
 <p> Thanks to <a href = "https://medium.com/@tglaiel/the-mathematically-optimal-first-guess-in-wordle-cbcb03c19b0a">Tyler Glaiel</a> for figuring out the most mathematically likely word with non-repeating characters.</p> 
