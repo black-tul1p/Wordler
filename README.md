@@ -13,7 +13,7 @@ A [Wordle](https://www.nytimes.com/games/wordle/index.html) solver implemented i
 
 ## How does it work? 🤔
 
-This implementation is pretty intuitive, no fancy graph or path-finding algorithms were required to determine the most likely word, thanks to **dynamic programming** (through the use of a cached wordlist). 
+This implementation is pretty intuitive, no fancy graph or greedy algorithms were required to determine the most likely word, thanks to **dynamic programming** (through the use of a cached wordlist). 
 
 The code begins by suggesting a word containing the _most mathematically likely_ word with completely unique (non-repeating) characters, `RAISE`, to greatly narrow the list of possibilities **from thousands of words to tens of words!** . In the second iteration, the code creates a list of words from the original (unaltered) wordlist using the following rules:
 > The word contains none of the characters in the first guess
